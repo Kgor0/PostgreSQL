@@ -2,7 +2,6 @@
 
 [PracticalSQL](https://www.nostarch.com/practicalSQL) by Anthony DeBarros is [available from No Starch Press](https://www.nostarch.com/practicalSQL).
 
-### Chapter 9: Inspecting and Modifying Data
+### Chapter 4: Importing and Exporting Data
 
-Explores how to  nd and  x incomplete or inaccurate data using a collection of records about meat, egg, and poultry producers as an example.
-
+Explains how to use SQL commands to load data from external files and then export it. You’ll load a table of U.S. Census population data that you’ll use throughout the book.

@@ -160,8 +160,10 @@ select * from contact_seeking
 CREATE TABLE interests (
 interest_id serial,
 interest varchar(25),
-CONSTRAINT int_key PRIMARY KEY (interest_id)
+CONSTRAINT interest_key PRIMARY KEY (interest_id)
 );
+
+drop table interests
 
 INSERT INTO interests(interest)
 VALUES('sports'),

@@ -219,41 +219,37 @@ left join seeking
 on my_contacts.seeking_id = seeking.seeking_id;
 
 
---10 Advanced Where Clause in Full Outer Join Query--
---The Where clause enables you to set conditions on the data to be returned
-in a query To fetch a list of department names that have no students listed
-we can use the WHERE clause in this query--
+--PRESENTATION--
 
-SELECT e.postal_code, city
-FROM postal_code e FULL OUTER JOIN my_contacts d 
-ON e.postal_code = d.postal_code
+--10--
+select e.postal_code, city
+FROM postal_code e FULL OUTER 
+JOIN my_contacts d
+ON e.postal_code = d.postal_code 
 WHERE d.postal_code IS NULL;
 
---20 ROLLUP--
---It is an
-alternative that is possible in Postgres that enables users to generate
-hierarchical rollups beginning with the primary accumulation and
-accompanied by the others in the hierarchical form. This regime is
-designated by the order in which the entries develop in the GROUP BY clause.--
+--11--
+select first_name, last_name, count(*)
+FROM my_contacts 
+GROUP BY ROLLUP (first_name, last_name);
 
-SELECT first_name, interest, count(*)
-FROM my_contacts LEFT JOIN contact_interest
-ON my_contacts.contact_id = contact_interest.contact_id
-LEFT join interests
-ON interests.interest_id = contact_interest.interest_id
-GROUP BY ROLLUP(first_name, interest)
-ORDER BY first_name;
 
 --29--
-----
+select first_name, email, phone, profession.profession, 
+LAST_VALUE (phone) over(partition by first_name ORDER BY phone range
+between unbounded preceding AND unbounded following) 
+AS phone_number
+FROM my_contacts INNER JOIN profession USING (profession);
+					   
+					 
 
-SELECT
-my_contacts,
-first_name,
-seeking,
-LAST_VALUE(seeking) OVER (
-PARTITION BY first_name
-ORDER BY
- RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED
-FOLLOWING
-) AS high_price
+
+
+
+
+
+
+
+
+
+
